@@ -5,7 +5,9 @@
  */
 (function (window) {
 	'use strict';
-	
+
+    //this is the constructor name.
+    //you can change this if you want to.
 	var init = 'initialize';
 
 	/**
@@ -27,7 +29,7 @@
 	/**
 	 * extending
 	 * this function overrides the implementation of base methods with
-	 * child methods.
+	 * child methods. also ignores initialize, constructor, to be added
 	 * @param childImpl
 	 * @param baseImpl
 	 */
@@ -38,7 +40,44 @@
 				childImpl[prop] = baseImpl[prop];
 	}
 
-	window.Classy = function (impl) {
+    /**
+     * Classy
+     * this is a global function which has 2 signatures.
+     * the first signature is when you want to make a class.
+     * var Person = Classy({
+     *      initialize: function (name) {
+     *          this.name = name;
+     *      },
+     *      getName: function () {
+     *          return this.name;
+     *      }
+     * });
+     *
+     * var person = new Person('John');
+     * console.log(person.getName());
+     *
+     *
+     * the second signature is when you want to add classMethod to Class definition.
+     * the following code does not return anything since you are attaching class Methods
+     * to Class definition.
+     * for example,
+     * Classy(Person, {
+     *      create: function () {
+     *          return new Person('no-one');
+     *      }
+     * });
+     *
+     * var defaultPerson = Person.create();
+     *
+     * @param impl
+     * @param classMethods
+     * @returns {Function | undefined}
+     */
+	window.Classy = function (impl, classMethods) {
+        if (classMethods) {
+            extending(impl, classMethods);
+            return;
+        }
 		var base = toClass(impl);
 		/**
 		 * extend
@@ -68,5 +107,5 @@
 			return child;
 		};
 		return base;
-	}
+	};
 }(window));
