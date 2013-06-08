@@ -3,7 +3,7 @@ Classy.js
 
 Description
 ----------------
-Tiny framework for writing inheritance in JavaScript. Less than 500 bytes, to be exact 437 bytes event without using gzip.
+Tiny framework for writing inheritance in JavaScript. Less than 500 bytes, to be exact 437 bytes even without using gzip.
 
 Introduction & Motovation
 -----------------
