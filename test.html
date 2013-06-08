@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <title>Classy v0.1.0 Test cases</title>
+        <script src="classy-0.1.0.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var Base = Classy({
+                initialize: function () {
+                    console.log('Base instantiated.');
+                }
+            });
+
+            var base = new Base();
+
+            console.log("****");
+
+            var Child = Base.extend({
+                initialize: function () {
+                    Child.base(this);
+                    console.log('Child instantiated.');
+                }
+            });
+
+            var child = new Child();
+
+            console.log("****");
+
+            var Grand = Child.extend({
+                initialize: function () {
+                    Grand.base(this);
+                    console.log('Grand instantiated.');
+                }
+            });
+
+            var grand = new Grand();
+
+            console.log("****");
+
+            Classy(Grand, {
+                createGrand: function () {
+                    return new Grand();
+                }
+            });
+
+            grand = Grand.createGrand();
+
+        </script>
+    </body>
+</html>
