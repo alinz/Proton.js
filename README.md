@@ -34,7 +34,9 @@ Couple of highlights:
 
 -> Simple syntax and interface, possibly customizable in terms of reserved key words.
 
--> Supports adding class methods as well  
+-> Supports adding class methods as well
+
+-> Uses prototype technique to reduces over-head of creating an object in JavaScript.
 
 How to use it?
 --------------------
@@ -81,7 +83,7 @@ Let's make a real example. Let's just assume that `Base` constructor accepts 2 a
 
 `Classy` also supports adding class methods which you can call them without creating an object from that class. Similar to Static methods in JAVA as an example.
 
-Here's an example:
+Here's an example of creating a class which has a class mehod that simulate `singleton` approach:
 
     var Base = Classy({
     	initialize: function () {
@@ -90,12 +92,18 @@ Here's an example:
     });
     
     Classy(Base, {
-    	getNewInstance: function () {
-    		return new Base();
-    	}
+    	getInstance: (function () {
+    	    var instance;
+    	    return function () {
+    	        if (!instance) {
+    	            instance = new Base();
+    	        }
+    	        return instance;
+    	    };
+    	}()
     });
     
-    var base = Base.getNewInstance();
+    var base = Base.getInstance();
     
 **NOTE:** I have added `test.html` which contains full example. 
 
