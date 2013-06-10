@@ -41,21 +41,19 @@
             console.log("****");
 
             Classy(Grand, {
-                createGrand: function () {
-                    return new Grand();
-                }
+                getInstance: (function () {
+                    var instance;
+                    return function () {
+                        if (!instance) {
+                            instance = new Grand();
+                        }
+
+                        return instance;
+                    };
+                }())
             });
 
-            grand = Grand.createGrand();
-
-
-
-
-            function Base () {
-                this.value = 10;
-            }
-
-            var base = new Base();
+            grand = Grand.getInstance();
 
         </script>
     </body>
