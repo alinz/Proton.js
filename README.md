@@ -12,15 +12,17 @@ I sat down and tried to rewrite his implementation in my own version and design.
 
 for example:
 
-    function Base(name) {
-    	this.name = name;
-	}
+```js
+function Base(name) {
+    this.name = name;
+}
 	
-	function Child() {
-    	Base.apply(this, arguments);
-	}
+function Child() {
+    Base.apply(this, arguments);
+}
 	
-	Child.prototype = new Base();
+Child.prototype = new Base();
+```
 
 Frankly speaking, it feels **WRONG** in so many ways. Why on earth I need to instanciate an object for my class to be extended, I know the reason, but to me this is a hack. So I don't want a hack for a basic feature. and that is why Classy was created.
 
@@ -42,68 +44,78 @@ How to use it?
 --------------------
 load the script in whatever you like, for example by using
 
-    <script type="text/javascript" src="classy-x.y.z.js"></script>
+```html
+<script type="text/javascript" src="classy-x.y.z.js"></script>
+```
 
 
 Now you can create the JavaScript classes in an easier way.
 For example:
 
-    var Base = Classy({
-        initialize: function() {
-            console.log('This is Base.');
-        }
-    });
+```js
+var Base = Classy({
+    initialize: function() {
+        console.log('This is Base.');
+    }
+});
 
-    var Child = Base.extend({
-        initialize: function() {
-            Child.base(this);
-            console.log('This is child');
-        }
-    });
+var Child = Base.extend({
+    initialize: function() {
+        Child.base(this);
+        console.log('This is child');
+    }
+});
 
-    var obj = new Child();
+var obj = new Child();
+```
 
 The concept is easy, Classy gets an JavaScript object and convert it into proper class definition using prototype feature.
 
 So all the base class starts with Classy object itself. From that point, all the children are using `extend` to extend the `Base` class.
 One thing to remember is the first line of your constructor which is `initialize` has to be calling the `Base` constructor. for example
-    
-    Child.base(this);
+
+```js
+Child.base(this);
+```
 
 What about passing arguments to `Base` constructor? In order to answer this question let's take a look at the `base` class method. `base` class method is define as follow:
     
     <Name of Drive Class>.base(<current object pointer>, <arg1>, <arg2>, ...);
 
 Let's make a real example. Let's just assume that `Base` constructor accepts 2 arguments. In order to pass the arguments to constructor, we will use it like the following:
-    
-    initialize: function(arg1, arg2, arg3) {
-        Child.base(this, arg2, arg3);
-        this.value1 = arg1;
-    }
+   
+ ```js
+initialize: function(arg1, arg2, arg3) {
+    Child.base(this, arg2, arg3);
+    this.value1 = arg1;
+}
+```
 
 `Classy` also supports adding class methods which you can call them without creating an object from that class. Similar to Static methods in JAVA as an example.
 
 Here's an example of creating a class which has a class mehod that simulate `singleton` approach:
 
-    var Base = Classy({
-    	initialize: function () {
-        	console.log('Base instantiated.');
-        }
-    });
+```js
+var Base = Classy({
+    initialize: function () {
+	console.log('Base instantiated.');
+    }
+});
     
-    Classy(Base, {
-    	getInstance: (function () {
-    	    var instance;
-    	    return function () {
-    	        if (!instance) {
-    	            instance = new Base();
-    	        }
-    	        return instance;
-    	    };
-    	}()
-    });
-    
-    var base = Base.getInstance();
+Classy(Base, {
+    getInstance: (function () {
+        var instance;
+        return function () {
+            if (!instance) {
+                instance = new Base();
+            }
+            return instance;
+        };
+    }()
+});
+
+var base = Base.getInstance();
+```
     
 **NOTE:** I have added `test.html` which contains full example. 
 
