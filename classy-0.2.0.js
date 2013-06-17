@@ -1,14 +1,15 @@
-/* Classy.js: Tiny framework for writing inheritance in javascript
- * version: 0.1.0
+/** @preserve Classy.js: Tiny framework for writing inheritance in javascript
+ * version: 0.2.0
  * By Ali Najafizadeh, http://morezilla.net
  * MIT Licensed.
  */
-(function (window) {
+(function () {
     'use strict';
 
     //this is the constructor name.
     //you can change this if you want to.
-    var init = 'initialize';
+    var init = 'initialize',
+        Classy;
 
     /**
      * toClass
@@ -73,7 +74,7 @@
      * @param classMethods
      * @returns {Function | undefined}
      */
-    window.Classy = function (impl, classMethods) {
+    Classy = function (impl, classMethods) {
         if (classMethods) {
             extending(impl, classMethods);
             return;
@@ -108,4 +109,14 @@
         };
         return base;
     };
-}(window));
+
+    //Export the The library for Node.js and Browser.
+    //for using in node, please use the following code
+    // var Classy = require('./classy-x.y.z.min.js');
+    if ('undefined' !== typeof module) {
+        module.exports = Classy;
+    } else {
+        window.Classy = Classy;
+    }
+
+}());
