@@ -3,14 +3,14 @@ Classy.js
 
 Description
 ----------------
-Tiny framework for writing inheritance in JavaScript. Less than 500 bytes, to be exact 437 bytes even without using gzip.
+Classy.js is a tiny framework for writing inheritance in JavaScript. It's currently less than 500 bytes. 437, to be exact, even without gzip.
 
-Introduction & Motovation
+Introduction & Motivation
 -----------------
-Classy.js is a challenge project for me after visiting **John Resig**'s popular **Simple JavaScript Inheritance** post in his blog.
-I sat down and tried to rewrite his implementation in my own version and design. I saw so many tutorials about how to do inheritance in javascript **BUT** one thing bothers me a lot and that one is `new` command during implementing inheritance. 
+I created Classy.js after visiting **John Resig**'s popular [Simple JavaScript Inheritance](http://ejohn.org/blog/simple-javascript-inheritance/) post in his blog.
+I sat down and tried to rewrite his implementation in my own version and design. I saw so many tutorials about how to do inheritance in javascript **BUT** one thing that bothered me a lot is using `new` during the inheritance implementation. 
 
-for example:
+For example:
 
 ```js
 function Base(name) {
@@ -24,33 +24,32 @@ function Child() {
 Child.prototype = new Base();
 ```
 
-Frankly speaking, it feels **WRONG** in so many ways. Why on earth I need to instanciate an object for my class to be extended, I know the reason, but to me this is a hack. So I don't want a hack for a basic feature. and that is why Classy was created.
+Frankly, it just feels **WRONG**. Why instantiate a new object just for my inheritance support? Or rather, I know the reason, but to me it's just a hack; I don't want a hack for a basic feature &mdash; and that is why Classy was created.
 
-Couple of highlights:
+Highlights:
 
 -> Extremely small and compact. can be copy/paste to any library.
 
 -> Doesn't use `new` during of implementation of inheritance.
 
--> Supports by all browsers, old and new.
+-> Supported by all browsers, old and new.
 
 -> Simple syntax and interface, possibly customizable in terms of reserved key words.
 
--> Supports adding class methods as well
+-> Support for class methods
 
 -> Uses prototype technique to reduces over-head of creating an object in JavaScript.
 
 How to use it?
 --------------------
-load the script in whatever you like, for example by using
+Load the script however you like. For example:
 
 ```html
 <script type="text/javascript" src="classy-x.y.z.js"></script>
 ```
 
 
-Now you can create the JavaScript classes in an easier way.
-For example:
+Now you can create the JavaScript classes like this:
 
 ```js
 var Base = Classy({
@@ -69,20 +68,21 @@ var Child = Base.extend({
 var obj = new Child();
 ```
 
-The concept is easy, Classy gets an JavaScript object and convert it into proper class definition using prototype feature.
+Classy gets create a JavaScript object definition using prototype internally, ready for instantiation.
 
-So all the base class starts with Classy object itself. From that point, all the children are using `extend` to extend the `Base` class.
-One thing to remember is the first line of your constructor which is `initialize` has to be calling the `Base` constructor. for example
+All the base class starts with Classy object itself. From that point, all the children use `extend` to extend the `Base` class.
+
+Note: the extending class needs to pass `initialize` field, and the first line of the `initialize` function must call the `Base` constructor. 
 
 ```js
 Child.base(this);
 ```
 
-What about passing arguments to `Base` constructor? In order to answer this question let's take a look at the `base` class method. `base` class method is define as follow:
+What about passing arguments to `Base` constructor? Take a look at the `base` class method:
     
     <Name of Drive Class>.base(<current object pointer>, <arg1>, <arg2>, ...);
 
-Let's make a real example. Let's just assume that `Base` constructor accepts 2 arguments. In order to pass the arguments to constructor, we will use it like the following:
+Arguments to `initialize` can be passed along to the superclass. For example, if the `Base` constructor accepts 2 arguments, pass them to the subclass and then pass them along to the base class like so:
    
  ```js
 initialize: function(arg1, arg2, arg3) {
@@ -91,9 +91,9 @@ initialize: function(arg1, arg2, arg3) {
 }
 ```
 
-`Classy` also supports adding class methods which you can call them without creating an object from that class. Similar to Static methods in JAVA as an example.
+`Classy` also supports class methods which you can call directly without instantiation like static methods in JAVA as an example.
 
-Here's an example of creating a class which has a class mehod that simulate `singleton` approach:
+Here's an example of `singleton` implementation with Classy.js:
 
 ```js
 var Base = Classy({
