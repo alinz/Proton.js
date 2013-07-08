@@ -1,4 +1,4 @@
-/** @preserve Classy.js: Tiny framework for writing inheritance in javascript
+/** @preserve Proton.js: Tiny framework for writing inheritance in javascript
  * version: 0.2.0
  * By Ali Najafizadeh, http://morezilla.net
  * MIT Licensed.
