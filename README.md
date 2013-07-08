@@ -1,13 +1,13 @@
-Classy.js
+Proton.js (used to be Classy.js)
 ==========
 
 Description
 ----------------
-Classy.js is a tiny framework for writing inheritance in JavaScript. It's currently less than 500 bytes. 437, to be exact, even without gzip.
+Proton.js is a tiny framework for writing inheritance in JavaScript. It's currently less than 500 bytes. 437, to be exact, even without gzip.
 
 Introduction & Motivation
 -----------------
-I created Classy.js after visiting **John Resig**'s popular [Simple JavaScript Inheritance](http://ejohn.org/blog/simple-javascript-inheritance/) post in his blog.
+I created Proton.js after visiting **John Resig**'s popular [Simple JavaScript Inheritance](http://ejohn.org/blog/simple-javascript-inheritance/) post in his blog.
 I sat down and tried to rewrite his implementation in my own version and design. I saw so many tutorials about how to do inheritance in javascript **BUT** one thing that bothered me a lot is using `new` during the inheritance implementation. 
 
 For example:
@@ -24,7 +24,7 @@ function Child() {
 Child.prototype = new Base();
 ```
 
-Frankly, it just feels **WRONG**. Why instantiate a new object just for my inheritance support? Or rather, I know the reason, but to me it's just a hack; I don't want a hack for a basic feature &mdash; and that is why Classy was created.
+Frankly, it just feels **WRONG**. Why instantiate a new object just for my inheritance support? Or rather, I know the reason, but to me it's just a hack; I don't want a hack for a basic feature &mdash; and that is why `Proton.js` was created.
 
 Highlights:
 
@@ -45,14 +45,14 @@ How to use it?
 Load the script however you like. For example:
 
 ```html
-<script type="text/javascript" src="classy-x.y.z.js"></script>
+<script type="text/javascript" src="proton-x.y.z.js"></script>
 ```
 
 
 Now you can create the JavaScript classes like this:
 
 ```js
-var Base = Classy({
+var Base = Proton({
     initialize: function() {
         console.log('This is Base.');
     }
@@ -68,9 +68,9 @@ var Child = Base.extend({
 var obj = new Child();
 ```
 
-Classy gets create a JavaScript object definition using prototype internally, ready for instantiation.
+Proton gets create a JavaScript object definition using prototype internally, ready for instantiation.
 
-All the base class starts with Classy object itself. From that point, all the children use `extend` to extend the `Base` class.
+All the base class starts with Proton object itself. From that point, all the children use `extend` to extend the `Base` class.
 
 Note: the extending class needs to pass `initialize` field, and the first line of the `initialize` function must call the `Base` constructor. 
 
@@ -91,18 +91,18 @@ initialize: function(arg1, arg2, arg3) {
 }
 ```
 
-`Classy` also supports class methods which you can call directly without instantiation like static methods in JAVA as an example.
+`Proton` also supports class methods which you can call directly without instantiation like static methods in JAVA as an example.
 
-Here's an example of `singleton` implementation with Classy.js:
+Here's an example of `singleton` implementation with Proton.js:
 
 ```js
-var Base = Classy({
+var Base = Proton({
     initialize: function () {
 	console.log('Base instantiated.');
     }
 });
     
-Classy(Base, {
+Proton(Base, {
     getInstance: (function () {
         var instance;
         return function () {

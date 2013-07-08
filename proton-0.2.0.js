@@ -9,7 +9,7 @@
     //this is the constructor name.
     //you can change this if you want to.
     var init = 'initialize',
-        Classy;
+        Proton;
 
     /**
      * toClass
@@ -42,10 +42,10 @@
     }
 
     /**
-     * Classy
+     * Proton
      * this is a global function which has 2 signatures.
      * the first signature is when you want to make a class.
-     * var Person = Classy({
+     * var Person = Proton({
      *      initialize: function (name) {
      *          this.name = name;
      *      },
@@ -62,7 +62,7 @@
      * the following code does not return anything since you are attaching class Methods
      * to Class definition.
      * for example,
-     * Classy(Person, {
+     * Proton(Person, {
      *      create: function () {
      *          return new Person('no-one');
      *      }
@@ -74,7 +74,7 @@
      * @param classMethods
      * @returns {Function | undefined}
      */
-    Classy = function (impl, classMethods) {
+    Proton = function (impl, classMethods) {
         if (classMethods) {
             extending(impl, classMethods);
             return;
@@ -89,7 +89,7 @@
         base.extend = function (childImpl) {
             var child;
             extending(childImpl, impl);
-            child = Classy(childImpl);
+            child = Proton(childImpl);
 
             //this class method is designed to call the Base constructor
             //this method has be called inside initialize method of child class.
@@ -112,11 +112,11 @@
 
     //Export the The library for Node.js and Browser.
     //for using in node, please use the following code
-    // var Classy = require('./classy-x.y.z.min.js');
+    // var Proton = require('./classy-x.y.z.min.js');
     if ('undefined' !== typeof module) {
-        module.exports = Classy;
+        module.exports = Proton;
     } else {
-        window.Classy = Classy;
+        window.Proton = Proton;
     }
 
 }());
