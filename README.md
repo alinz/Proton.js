@@ -116,7 +116,12 @@ Proton(Base, {
 
 var base = Base.getInstance();
 ```
-    
+
+AOP
+------
+I have added basic AOP operations (`before`, `afterReturning`, `afterThrowing`) to Proton. All of these operations are chainable. please take a look at `test.html` and source code for more info.
+
+
 **NOTE:** I have added `test.html` which contains full example. 
 
 Questions

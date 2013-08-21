@@ -1,10 +1,13 @@
 <html>
     <head>
         <title>Classy v0.1.0 Test cases</title>
-        <script src="classy-0.1.0.js" type="text/javascript"></script>
+        <script src="proton-0.2.0.js" type="text/javascript"></script>
     </head>
     <body>
         <script type="text/javascript">
+            var Classy = Proton;
+
+
             var Base = Classy({
                 initialize: function () {
                     console.log('Base instantiated.');
@@ -33,6 +36,9 @@
                 initialize: function () {
                     Grand.base(this);
                     console.log('Grand instantiated.');
+                },
+                message: function () {
+                    console.log("hello");
                 }
             });
 
@@ -54,6 +60,20 @@
             });
 
             grand = Grand.getInstance();
+
+
+
+            var aop = Proton.AOP(Grand, "message");
+
+            aop.before(function () {
+                console.log("------");
+            }).afterReturning(function () {
+                console.log("++++++");
+            });
+
+
+
+            grand.message();
 
         </script>
     </body>
