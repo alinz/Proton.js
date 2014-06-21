@@ -1,0 +1,23 @@
+{
+    "name": "protonjs",
+    "description": "Proton.js is a tiny framework for writing inheritance in JavaScript",
+    "author": {
+        "name": "Ali Najafizadeh",
+        "email": "a.najafizadeh@gmail.com",
+        "url": "http://blog.unilius.com"
+    },
+    "version": "0.2.1",
+    "dependencies": {},
+    "devDependencies": {
+        "simpletestjs": "0.0.2"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/alinz/Proton.js.git"
+    },
+    "scripts": {
+        "test": "cd test; node test.js"
+    },
+    "main": "src/proton.min.js",
+    "engine": "node >= 0.10.0"
+}
